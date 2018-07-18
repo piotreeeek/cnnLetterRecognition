@@ -6,12 +6,6 @@ clear, clc;
 layers = [
     imageInputLayer([28 28 1])
     
-    convolution2dLayer(3,8,'Padding',1)
-    batchNormalizationLayer
-    reluLayer
-    
-    maxPooling2dLayer(2,'Stride',2)
-    
     convolution2dLayer(3,16,'Padding',1)
     batchNormalizationLayer
     reluLayer
@@ -22,11 +16,18 @@ layers = [
     batchNormalizationLayer
     reluLayer
     
+    maxPooling2dLayer(2,'Stride',2)
+    
+    convolution2dLayer(3,64,'Padding',1)
+    batchNormalizationLayer
+    reluLayer
+    dropoutLayer
+    
     fullyConnectedLayer(26)
     softmaxLayer
     classificationLayer];
 
-options = trainingOptions('sgdm', ...
+options = trainingOptions('rmsprop', ...
     'MaxEpochs',10, ...
     'ValidationData',{images_test, labels_test}, ...
     'ValidationFrequency',300, ...
@@ -34,4 +35,4 @@ options = trainingOptions('sgdm', ...
     'Plots','training-progress');
 
 net = trainNetwork(images,labels,layers,options);
-save net.mat net
+save net.mat net;
