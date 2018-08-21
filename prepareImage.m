@@ -9,17 +9,11 @@ function [img, err] = prepareImage(fl)
         bw = imcomplement(bw);
     end
     if sum(sum(bw)) > 0
-        [labeledImage, numberOfBlobs] = bwlabel(bw);
-        measurements = regionprops(labeledImage, 'BoundingBox');
-        bbox = measurements.BoundingBox;
-        x1 = ceil(bbox(1)-(bbox(3)/10));
-        x2 = round(bbox(3)+(bbox(3)/5));
-        y1 = ceil(bbox(2)-(bbox(4)/10));
-        y2 = round(bbox(4)+(bbox(4)/5));
+        [x1, x2, y1, y2] = getCropCoordinates(bw);
         I2 = imcrop(bw, [x1, y1, x2, y2]);
 
         imgSize = size(I2);
-        imgSizeMax = max(imgSize)
+        imgSizeMax = max(imgSize);
         I3 = uint8(zeros(imgSizeMax));
 
         I2 = uint8(255 * I2);
