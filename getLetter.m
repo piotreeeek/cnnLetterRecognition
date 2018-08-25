@@ -5,7 +5,7 @@ function[letter] = getLetter(img)
     if exist('net.mat', 'file') == 2
         load('net.mat');
     else
-        net = net_build();
+        net = netBuild();
     end
 
     [img, err] = prepareImage(img);

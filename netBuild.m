@@ -1,4 +1,4 @@
-function [net] = net_build()
+function [net] = netBuild()
 clear, clc;
 
 [images, images_test, labels, labels_test] = loadTrainData();
