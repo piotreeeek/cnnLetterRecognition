@@ -1,4 +1,4 @@
-function [letter] = getLetterForApp(path)
+function [letter, err] = getLetterForApp(path)
     img = imread(path);
-    letter = getLetter(img);
+    [letter, err] = getLetter(img);
 end

@@ -1,3 +1,6 @@
+%Error codes:
+%0 - image is ok
+%1 - blank image
 function [img, err] = prepareImage(fl)
     err = 0;
    if size(fl, 3) == 3
@@ -26,6 +29,6 @@ function [img, err] = prepareImage(fl)
         img = uint8(255 * I2);
     else
         img = 0;
-        err = 'Image blank';
+        err = 1;
     end
 end

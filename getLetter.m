@@ -1,4 +1,7 @@
-function[letter] = getLetter(img)
+%Error codes:
+%0 - image is ok
+%1 - blank image
+function[letter, err] = getLetter(img)
 
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm' ,'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
@@ -10,7 +13,7 @@ function[letter] = getLetter(img)
 
     [img, err] = prepareImage(img);
     if err ~= 0 
-        letter = err;
+        letter = '-1';
     else
         letter = letters(classify(net, img));
     end
