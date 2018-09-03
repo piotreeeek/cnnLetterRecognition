@@ -7,8 +7,8 @@ function [img, err] = prepareImage(fl)
         fl = rgb2gray(fl);
     end
     bw = imbinarize(fl);
-    [x y] = size(bw);
-    if sum(sum(bw)) > x*y/3
+    [x, y] = size(bw);
+    if sum(sum(bw)) > (x*y/2)
         bw = imcomplement(bw);
     end
     if sum(sum(bw)) > 0
